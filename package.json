@@ -10,7 +10,10 @@
     "sass": "^1.89.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "copy:fonts": "mkdir -p static/fonts && cp -r node_modules/@fontsource/atkinson-hyperlegible/files/*-400-normal.* node_modules/@fontsource/atkinson-hyperlegible/files/*-700-normal.* node_modules/@fontsource/victor-mono/files/*-400-normal.* node_modules/@fontsource/victor-mono/files/*-400-italic.* node_modules/@fontsource/merriweather/files/*-400-normal.* node_modules/@fontsource/merriweather/files/*-700-normal.* node_modules/@fontsource/merriweather/files/*-400-italic.* static/fonts/",
+    "build:css": "sass sass/main.scss static/css/main.css --style=compressed",
+    "build": "npm run copy:fonts && npm run build:css && zola build",
+    "dev": "zola serve"
   },
   "repository": {
     "type": "git",

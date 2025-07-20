@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "description": "XOstack Zola SSG Theme",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "@fontsource/atkinson-hyperlegible": "^5.2.6",
+    "@fontsource/merriweather": "^5.2.9",
+    "@fontsource/victor-mono": "^5.2.6",
+    "sass": "^1.89.2"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,7 +16,12 @@
     "type": "git",
     "url": "git+https://github.com/xostack/xotheme.git"
   },
-  "keywords": ["zola", "theme", "static site generator", "XOstack"],
+  "keywords": [
+    "zola",
+    "theme",
+    "static site generator",
+    "XOstack"
+  ],
   "author": "Harshad Sharma <harshad@sharma.io>",
   "license": "MIT",
   "bugs": {

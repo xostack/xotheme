@@ -1,0 +1,269 @@
+/* sass/_base.scss */
+/* XOtheme Base Styles - Semantic HTML foundations */
+
+/* CSS Reset and Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%; /* Respects user's font size preference */
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-body);
+  background-color: var(--color-bg-1);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography Elements */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: var(--line-height-tight);
+  color: var(--color-text-heading);
+  margin-bottom: var(--space-s);
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  margin-bottom: var(--space-m);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  margin-top: var(--space-l);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+  margin-top: var(--space-m);
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+  margin-top: var(--space-m);
+}
+
+h5 {
+  font-size: var(--font-size-h5);
+  font-weight: 600;
+}
+
+h6 {
+  font-size: var(--font-size-h6);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  color: var(--color-text-muted);
+}
+
+/* Paragraph and Text */
+p {
+  margin-bottom: var(--space-s);
+}
+
+p + p {
+  margin-top: var(--space-s);
+}
+
+/* Links */
+a {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-link-hover);
+}
+
+a:visited {
+  color: var(--color-link-visited);
+}
+
+a:focus {
+  outline: 2px solid var(--color-highlight);
+  outline-offset: 2px;
+  border-radius: var(--radius-s);
+}
+
+/* Lists */
+ul, ol {
+  margin-bottom: var(--space-s);
+  padding-left: var(--space-m);
+}
+
+li {
+  margin-bottom: 0.25rem;
+}
+
+li::marker {
+  color: var(--color-text-muted);
+}
+
+/* Definition Lists */
+dl {
+  margin-bottom: var(--space-s);
+}
+
+dt {
+  font-weight: 600;
+  color: var(--color-text-heading);
+}
+
+dd {
+  margin-left: var(--space-m);
+  margin-bottom: 0.5rem;
+}
+
+/* Code and Preformatted Text */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  padding: 0.125rem 0.25rem;
+  background-color: var(--color-bg-2);
+  border-radius: var(--radius-s);
+  border: 1px solid var(--color-bg-3);
+}
+
+pre {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: var(--line-height-normal);
+  padding: var(--space-s);
+  background-color: var(--color-bg-2);
+  border-radius: var(--radius-m);
+  border: 1px solid var(--color-bg-3);
+  overflow-x: auto;
+  margin-bottom: var(--space-s);
+}
+
+pre code {
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: inherit;
+}
+
+/* Blockquotes */
+blockquote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  padding: var(--space-s) var(--space-m);
+  margin: var(--space-m) 0;
+  border-left: 4px solid var(--color-primary);
+  background-color: var(--color-bg-2);
+  border-radius: 0 var(--radius-m) var(--radius-m) 0;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* Horizontal Rule */
+hr {
+  border: none;
+  height: 1px;
+  background-color: var(--color-bg-3);
+  margin: var(--space-l) 0;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--space-s);
+}
+
+th, td {
+  padding: 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-bg-3);
+}
+
+th {
+  font-weight: 600;
+  color: var(--color-text-heading);
+  background-color: var(--color-bg-2);
+}
+
+/* Images and Media */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-s);
+}
+
+figure {
+  margin: var(--space-m) 0;
+}
+
+figcaption {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+/* Form Elements */
+button {
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+/* Focus Styles for Accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-highlight);
+  outline-offset: 2px;
+}
+
+/* Selection Styles */
+::selection {
+  background-color: var(--color-highlight);
+  color: var(--color-text-heading);
+}
+
+/* Utility Classes */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--color-bg-1);
+  color: var(--color-text-body);
+  padding: 8px;
+  text-decoration: none;
+  border-radius: var(--radius-s);
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  top: 6px;
+}

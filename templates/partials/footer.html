@@ -1,0 +1,72 @@
+<footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+        <!-- Footer Content -->
+        <div class="footer-content">
+            {% if config.extra.author %}
+            <p class="footer-author">
+                © {{ now() | date(format="%Y") }} {{ config.extra.author }}
+            </p>
+            {% endif %}
+            
+            <!-- Social Links -->
+            {% if config.extra.github or config.extra.twitter or config.extra.linkedin or config.extra.email %}
+            <nav class="social-links" aria-label="Social media links">
+                <ul>
+                    {% if config.extra.email %}
+                    <li>
+                        <a href="mailto:{{ config.extra.email }}" 
+                           aria-label="Send email to {{ config.extra.author | default(value="site author") }}">
+                            Email
+                        </a>
+                    </li>
+                    {% endif %}
+                    
+                    {% if config.extra.github %}
+                    <li>
+                        <a href="https://github.com/{{ config.extra.github }}" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           aria-label="Visit GitHub profile">
+                            GitHub
+                        </a>
+                    </li>
+                    {% endif %}
+                    
+                    {% if config.extra.twitter %}
+                    <li>
+                        <a href="https://twitter.com/{{ config.extra.twitter }}" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           aria-label="Visit Twitter profile">
+                            Twitter
+                        </a>
+                    </li>
+                    {% endif %}
+                    
+                    {% if config.extra.linkedin %}
+                    <li>
+                        <a href="https://linkedin.com/in/{{ config.extra.linkedin }}" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           aria-label="Visit LinkedIn profile">
+                            LinkedIn
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        </div>
+        
+        <!-- RSS Feed Link -->
+        {% if config.generate_feed %}
+        <div class="footer-meta">
+            <a href="{{ get_url(path="rss.xml", trailing_slash=false) }}" 
+               class="rss-link"
+               aria-label="Subscribe to RSS feed">
+                RSS Feed
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</footer>

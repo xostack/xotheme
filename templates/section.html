@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}{{ section.title }} | {{ config.title }}{% endblock title %}
+{% block description %}{{ section.description | default(value=config.description) }}{% endblock description %}
+
+{% block body_class %}section{% endblock body_class %}
+
+{% block content %}
+<div class="section-page">
+    <!-- Section Header -->
+    <header class="section-header">
+        <div class="content-wrapper">
+            <h1 class="section-title">{{ section.title }}</h1>
+            {% if section.description %}
+            <p class="section-description">{{ section.description }}</p>
+            {% endif %}
+        </div>
+    </header>
+    
+    <!-- Section Content -->
+    {% if section.content %}
+    <section class="section-content">
+        <div class="content-wrapper">
+            {{ section.content | safe }}
+        </div>
+    </section>
+    {% endif %}
+    
+    <!-- Pages List -->
+    {% if section.pages %}
+    <section class="pages-list" aria-labelledby="pages-heading">
+        <div class="content-wrapper">
+            {% if section.pages | length > 0 %}
+            <h2 id="pages-heading" class="visually-hidden">{{ section.title }} List</h2>
+            <div class="pages-grid">
+                {% for page in section.pages %}
+                <article class="page-card">
+                    <header class="page-card-header">
+                        <h3 class="page-title">
+                            <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
+                        </h3>
+                        {% if page.date %}
+                        <time class="page-date" datetime="{{ page.date | date(format="%Y-%m-%d") }}">
+                            {{ page.date | date(format="%B %d, %Y") }}
+                        </time>
+                        {% endif %}
+                    </header>
+                    
+                    {% if page.summary %}
+                    <div class="page-summary">
+                        {{ page.summary | safe }}
+                    </div>
+                    {% endif %}
+                    
+                    {% if page.taxonomies.tags %}
+                    <footer class="page-tags">
+                        <ul class="tags-list">
+                            {% for tag in page.taxonomies.tags %}
+                            <li class="tag">
+                                <a href="{{ get_taxonomy_url(kind="tags", name=tag) | safe }}">#{{ tag }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </footer>
+                    {% endif %}
+                </article>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="empty-message">No {{ section.title | lower }} yet.</p>
+            {% endif %}
+        </div>
+    </section>
+    {% endif %}
+    
+    <!-- Subsections -->
+    {% if section.subsections %}
+    <section class="subsections" aria-labelledby="subsections-heading">
+        <div class="content-wrapper">
+            <h2 id="subsections-heading">Categories</h2>
+            <nav class="subsections-nav">
+                <ul class="subsections-list">
+                    {% for subsection_path in section.subsections %}
+                    {% set subsection = get_section(path=subsection_path) %}
+                    <li class="subsection-item">
+                        <a href="{{ subsection.permalink | safe }}" class="subsection-link">
+                            <h3 class="subsection-title">{{ subsection.title }}</h3>
+                            {% if subsection.description %}
+                            <p class="subsection-description">{{ subsection.description }}</p>
+                            {% endif %}
+                            <span class="subsection-count">{{ subsection.pages | length }} {% if subsection.pages | length == 1 %}item{% else %}items{% endif %}</span>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+    </section>
+    {% endif %}
+</div>
+{% endblock content %}

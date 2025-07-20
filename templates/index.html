@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}{{ section.title | default(value=config.title) }}{% endblock title %}
+{% block description %}{{ section.description | default(value=config.description) }}{% endblock description %}
+
+{% block body_class %}home{% endblock body_class %}
+
+{% block content %}
+<div class="home-page">
+    <!-- Hero Section -->
+    {% if section.extra.hero %}
+    <section class="hero" aria-labelledby="hero-heading"
+      {% if section.extra.hero.background or section.extra.hero.colors -%}
+      style="
+        {%- if section.extra.hero.background -%}
+          {%- if section.extra.hero.background.type == "gradient" and section.extra.hero.background.gradient -%}
+        --hero-bg: linear-gradient({{ section.extra.hero.background.gradient.direction | default(value="to bottom") }}, {{ section.extra.hero.background.gradient.colors | join(sep=", ") }});
+          {%- elif section.extra.hero.background.type == "solid" and section.extra.hero.background.color -%}
+        --hero-bg: {{ section.extra.hero.background.color }};
+          {%- else -%}
+        --hero-bg: var(--color-primary);
+          {%- endif -%}
+        {%- endif -%}
+        {%- if section.extra.hero.colors -%}
+          {%- if section.extra.hero.colors.title -%}
+        --hero-title-color: {{ section.extra.hero.colors.title }};
+          {%- endif -%}
+          {%- if section.extra.hero.colors.subtitle -%}
+        --hero-subtitle-color: {{ section.extra.hero.colors.subtitle }};
+          {%- endif -%}
+          {%- if section.extra.hero.colors.description -%}
+        --hero-description-color: {{ section.extra.hero.colors.description }};
+          {%- endif -%}
+        {%- endif -%}
+      "
+      {%- endif %}
+    >
+    >
+        <div class="hero-content">
+            <h1 id="hero-heading" class="hero-title">
+                {{ section.extra.hero.title | default(value=config.title) }}
+            </h1>
+            {% if section.extra.hero.subtitle %}
+            <p class="hero-subtitle">{{ section.extra.hero.subtitle }}</p>
+            {% endif %}
+            {% if section.extra.hero.description %}
+            <div class="hero-description">
+                {{ section.extra.hero.description | markdown | safe }}
+            </div>
+            {% endif %}
+        </div>
+    </section>
+    {% endif %}
+    
+    <!-- Main Content -->
+    {% if section.content %}
+    <section class="page-content">
+        <div class="content-wrapper">
+            {{ section.content | safe }}
+        </div>
+    </section>
+    {% endif %}
+    
+    <!-- Recent Posts/Projects -->
+    {% if section.pages and section.pages | length > 0 %}
+    <section class="recent-content" aria-labelledby="recent-heading">
+        <div class="content-wrapper">
+            <h2 id="recent-heading">Recent Posts</h2>
+            <div class="posts-grid">
+                {% for page in section.pages | slice(end=6) %}
+                <article class="post-card">
+                    <h3 class="post-title">
+                        <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
+                    </h3>
+                    {% if page.summary %}
+                    <p class="post-summary">{{ page.summary | safe }}</p>
+                    {% endif %}
+                    {% if page.date %}
+                    <time class="post-date" datetime="{{ page.date | date(format="%Y-%m-%d") }}">
+                        {{ page.date | date(format="%B %d, %Y") }}
+                    </time>
+                    {% endif %}
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+</div>
+{% endblock content %}

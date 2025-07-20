@@ -1,0 +1,290 @@
+/* sass/_typography.scss */
+/* XOtheme Typography System */
+
+/* Font-face declarations */
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  src: url('/fonts/atkinson-hyperlegible-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  src: url('/fonts/atkinson-hyperlegible-latin-400-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  src: url('/fonts/atkinson-hyperlegible-latin-700-normal.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  src: url('/fonts/atkinson-hyperlegible-latin-700-italic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('/fonts/merriweather-latin-300-normal.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('/fonts/merriweather-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('/fonts/merriweather-latin-400-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('/fonts/merriweather-latin-700-normal.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Victor Mono';
+  src: url('/fonts/victor-mono-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Victor Mono';
+  src: url('/fonts/victor-mono-latin-400-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Victor Mono';
+  src: url('/fonts/victor-mono-latin-500-normal.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Victor Mono';
+  src: url('/fonts/victor-mono-latin-600-normal.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Typography variables and base styles */
+:root {
+  --font-primary: 'Atkinson Hyperlegible', sans-serif;
+  --font-serif: 'Merriweather', serif;
+  --font-mono: 'Victor Mono', monospace;
+  
+  /* Font sizes using golden ratio scale */
+  --font-size-xs: 0.875rem;     /* 14px */
+  --font-size-sm: 1rem;         /* 16px */
+  --font-size-base: 1.05rem;    /* 16.8px - slightly larger for readability */
+  --font-size-md: 1.25rem;      /* 20px */
+  --font-size-lg: 1.618rem;     /* 25.9px */
+  --font-size-xl: 2.618rem;     /* 41.9px */
+  --font-size-2xl: 4.236rem;    /* 67.8px */
+  
+  /* Line heights */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.6;
+  --line-height-loose: 1.8;
+  
+  /* Font weights */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+}
+
+/* Base typography */
+html {
+  font-size: 100%; /* 16px */
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-body);
+  background-color: var(--color-bg-1);
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-heading);
+  margin: 0 0 var(--space-s) 0;
+}
+
+h1 {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--space-m);
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-m);
+  margin-top: var(--space-xl);
+  line-height: 1.15;
+}
+
+h3 {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--space-s);
+  margin-top: var(--space-l);
+}
+
+h4 {
+  font-size: var(--font-size-md);
+  margin-bottom: var(--space-s);
+  margin-top: var(--space-m);
+}
+
+h5, h6 {
+  font-size: var(--font-size-base);
+  margin-bottom: var(--space-xs);
+  margin-top: var(--space-s);
+}
+
+/* Paragraphs and text elements */
+p {
+  margin: 0 0 var(--space-s) 0;
+}
+
+/* Strong and emphasis */
+strong, b {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-heading);
+}
+
+em, i {
+  font-style: italic;
+}
+
+/* Code and preformatted text */
+code, kbd, samp {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  font-weight: var(--font-weight-medium);
+}
+
+pre {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  overflow-x: auto;
+  padding: var(--space-s);
+  margin: var(--space-s) 0;
+  background-color: var(--color-bg-2);
+  border-radius: 4px;
+}
+
+pre code {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/* Links */
+a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+a:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Lists */
+ul, ol {
+  margin: 0 0 var(--space-s) 0;
+  padding-left: var(--space-m);
+}
+
+li {
+  margin-bottom: var(--space-s);
+  line-height: var(--line-height-relaxed);
+}
+
+/* Blockquotes */
+blockquote {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-loose);
+  margin: var(--space-m) 0;
+  padding: var(--space-s) var(--space-m);
+  border-left: 4px solid var(--color-primary);
+  background-color: var(--color-bg-2);
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* Utility classes for typography */
+.text-serif {
+  font-family: var(--font-serif);
+}
+
+.text-mono {
+  font-family: var(--font-mono);
+}
+
+.text-xs { font-size: var(--font-size-xs); }
+.text-sm { font-size: var(--font-size-sm); }
+.text-base { font-size: var(--font-size-base); }
+.text-md { font-size: var(--font-size-md); }
+.text-lg { font-size: var(--font-size-lg); }
+.text-xl { font-size: var(--font-size-xl); }
+.text-2xl { font-size: var(--font-size-2xl); }
+
+.font-light { font-weight: var(--font-weight-light); }
+.font-normal { font-weight: var(--font-weight-normal); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold { font-weight: var(--font-weight-bold); }
+
+

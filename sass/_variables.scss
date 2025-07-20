@@ -1,0 +1,32 @@
+/* sass/_variables.scss */
+/* XOtheme Variables - Spacing, Sizing, and Layout System */
+
+:root {
+  /* Spacing Scale - Based on Golden Ratio (1.618) */
+  --space-xs: 0.5rem;    /* 8px */
+  --space-s: 1rem;       /* 16px */
+  --space-m: 1.618rem;   /* ~26px */
+  --space-l: 2.618rem;   /* ~42px */
+  --space-xl: 4.236rem;  /* ~68px */
+  
+  /* Breakpoints */
+  --breakpoint-mobile: 900px;
+  
+  /* Content Width */
+  --content-width: 75ch;
+  
+  /* Border Radius */
+  --radius-s: 0.25rem;
+  --radius-m: 0.5rem;
+  --radius-l: 1rem;
+  
+  /* Shadows */
+  --shadow-light: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-heavy: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 250ms ease-in-out;
+  --transition-slow: 400ms ease-in-out;
+}

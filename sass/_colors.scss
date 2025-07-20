@@ -1,0 +1,78 @@
+/* sass/_colors.scss */
+/* XOtheme Color System - Blue Sky Palette with Light/Dark Themes */
+
+:root {
+  /* Light Theme (Default) */
+  --color-primary: hsl(205, 80%, 55%);      /* Bright Sky Blue */
+  --color-secondary: hsl(210, 30%, 65%);     /* Muted Slate Blue */
+  --color-highlight: hsl(45, 100%, 60%);     /* Sunny Yellow Accent */
+  --color-text-body: hsl(215, 25%, 20%);     /* Dark Slate */
+  --color-text-heading: hsl(215, 35%, 15%);  /* Deeper Slate */
+  --color-text-muted: hsl(215, 15%, 45%);    /* Muted text */
+  --color-bg-1: hsl(210, 30%, 98%);          /* Almost White */
+  --color-bg-2: hsl(210, 30%, 94%);          /* Light Gray */
+  --color-bg-3: hsl(210, 30%, 88%);          /* Border Color */
+  --color-bg-toolbar: hsla(210, 30%, 98%, 0.85); /* Translucent for Toolbar */
+  
+  /* Link colors */
+  --color-link: var(--color-primary);
+  --color-link-hover: hsl(205, 80%, 45%);
+  --color-link-visited: hsl(250, 60%, 55%);
+}
+
+/* Dark Theme */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-primary: hsl(205, 85%, 70%);      /* Lighter, vibrant blue */
+    --color-secondary: hsl(210, 20%, 55%);     /* Muted Slate */
+    --color-highlight: hsl(45, 100%, 65%);     /* Bright Yellow */
+    --color-text-body: hsl(210, 25%, 88%);     /* Light Gray Text */
+    --color-text-heading: hsl(210, 30%, 98%);  /* Off-white Heading */
+    --color-text-muted: hsl(210, 15%, 65%);    /* Muted text */
+    --color-bg-1: hsl(215, 25%, 12%);          /* Near Black */
+    --color-bg-2: hsl(215, 22%, 18%);          /* Dark Gray */
+    --color-bg-3: hsl(215, 20%, 28%);          /* Border Color */
+    --color-bg-toolbar: hsla(215, 25%, 12%, 0.85); /* Translucent for Toolbar */
+    
+    /* Link colors for dark theme */
+    --color-link: var(--color-primary);
+    --color-link-hover: hsl(205, 85%, 80%);
+    --color-link-visited: hsl(250, 60%, 75%);
+  }
+}
+
+/* JS Override for Dark Theme */
+[data-theme="dark"] {
+  --color-primary: hsl(205, 85%, 70%);
+  --color-secondary: hsl(210, 20%, 55%);
+  --color-highlight: hsl(45, 100%, 65%);
+  --color-text-body: hsl(210, 25%, 88%);
+  --color-text-heading: hsl(210, 30%, 98%);
+  --color-text-muted: hsl(210, 15%, 65%);
+  --color-bg-1: hsl(215, 25%, 12%);
+  --color-bg-2: hsl(215, 22%, 18%);
+  --color-bg-3: hsl(215, 20%, 28%);
+  --color-bg-toolbar: hsla(215, 25%, 12%, 0.85);
+  
+  --color-link: var(--color-primary);
+  --color-link-hover: hsl(205, 85%, 80%);
+  --color-link-visited: hsl(250, 60%, 75%);
+}
+
+/* JS Override for Light Theme */
+[data-theme="light"] {
+  --color-primary: hsl(205, 80%, 55%);
+  --color-secondary: hsl(210, 30%, 65%);
+  --color-highlight: hsl(45, 100%, 60%);
+  --color-text-body: hsl(215, 25%, 20%);
+  --color-text-heading: hsl(215, 35%, 15%);
+  --color-text-muted: hsl(215, 15%, 45%);
+  --color-bg-1: hsl(210, 30%, 98%);
+  --color-bg-2: hsl(210, 30%, 94%);
+  --color-bg-3: hsl(210, 30%, 88%);
+  --color-bg-toolbar: hsla(210, 30%, 98%, 0.85);
+  
+  --color-link: var(--color-primary);
+  --color-link-hover: hsl(205, 80%, 45%);
+  --color-link-visited: hsl(250, 60%, 55%);
+}

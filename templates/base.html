@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="{{ config.default_language | default(value="en") }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>{% block title %}{{ config.title }}{% endblock title %}</title>
+    <meta name="description" content="{% block description %}{{ config.description }}{% endblock description %}">
+    
+    <!-- Author & Contact -->
+    {% if config.extra.author %}
+    <meta name="author" content="{{ config.extra.author }}">
+    {% endif %}
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="{% block og_type %}website{% endblock og_type %}">
+    <meta property="og:title" content="{% block og_title %}{{ config.title }}{% endblock og_title %}">
+    <meta property="og:description" content="{% block og_description %}{{ config.description }}{% endblock og_description %}">
+    <meta property="og:url" content="{{ current_url | default(value=config.base_url) }}">
+    
+    <!-- Theme Color & Icons -->
+    <meta name="theme-color" content="#3b82f6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#60a5fa" media="(prefers-color-scheme: dark)">
+    
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="/fonts/atkinson-hyperlegible-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/atkinson-hyperlegible-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/css/main.css">
+    
+    <!-- RSS Feed -->
+    {% if config.generate_feed %}
+    <link rel="alternate" type="application/rss+xml" title="{{ config.title }}" href="{{ get_url(path="rss.xml", trailing_slash=false) }}">
+    {% endif %}
+    
+    <!-- Block for additional head content -->
+    {% block extra_head %}{% endblock extra_head %}
+</head>
+<body class="{% block body_class %}{% endblock body_class %}">
+    <!-- Reading Progress Bar -->
+    <div id="reading-progress" class="reading-progress" aria-hidden="true"></div>
+    
+    <!-- Skip Navigation Link for Accessibility -->
+    <a href="#main-content" class="skip-nav">Skip to main content</a>
+    
+    <!-- Site Header/Navigation -->
+    {% include "partials/header.html" %}
+    
+    <!-- Main Content Area -->
+    <main id="main-content" role="main">
+        {% block content %}{% endblock content %}
+    </main>
+    
+    <!-- Site Footer -->
+    {% include "partials/footer.html" %}
+    
+    <!-- Main JavaScript -->
+    <script src="/js/main.js"></script>
+    
+    <!-- Block for additional scripts -->
+    {% block extra_scripts %}{% endblock extra_scripts %}
+</body>
+</html>

@@ -1,0 +1,79 @@
+<header class="site-header" role="banner">
+    <div class="header-inner">
+        <!-- Mobile Menu Toggle (Left) -->
+        <button class="mobile-menu-toggle" 
+                aria-controls="main-navigation" 
+                aria-expanded="false"
+                aria-label="Toggle navigation menu"
+                type="button">
+            <span class="menu-icon">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+            </span>
+        </button>
+        
+        <!-- Site Logo/Title -->
+        <div class="site-branding">
+            <a href="/" class="site-title" aria-label="Go to homepage">
+                <span class="site-name">{{ config.title }}</span>
+            </a>
+        </div>
+        
+        <!-- Main Navigation -->
+        <nav id="main-navigation" class="main-navigation" role="navigation" aria-label="Main navigation">
+            <!-- Navigation Header (Mobile Only) -->
+            <div class="nav-header" tabindex="-1">
+                <h2 class="nav-title">Navigation</h2>
+            </div>
+            
+            {% if config.extra.nav %}
+            <ul class="nav-menu">
+                {% for item in config.extra.nav %}
+                <li class="nav-item">
+                    <a href="{{ item.url | safe }}" 
+                       class="nav-link{% if current_path and current_path == item.url %} current{% endif %}"
+                       {% if item.url is starting_with("http") %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                        {{ item.name }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            
+            <!-- Mobile Menu Close Button -->
+            <button class="mobile-menu-close" 
+                    aria-label="Close navigation menu"
+                    type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </nav>
+        
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay" aria-hidden="true" tabindex="-1"></div>
+        
+        <!-- Options Menu -->
+        <div class="options-menu">
+            <button id="options-toggle" class="options-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Open options menu">
+                <span class="kebab-icon" aria-hidden="true">
+                    <span class="kebab-dot"></span>
+                    <span class="kebab-dot"></span>
+                    <span class="kebab-dot"></span>
+                </span>
+            </button>
+            
+            <div class="options-dropdown" role="menu" aria-labelledby="options-toggle">
+                <button id="theme-toggle" class="options-item" role="menuitem" aria-label="Toggle light/dark theme">
+                    <span class="option-icon" aria-hidden="true">🌙</span>
+                    <span class="option-text">Toggle Theme</span>
+                    <span class="option-shortcut">t</span>
+                </button>
+                <button id="help-toggle" class="options-item" role="menuitem" aria-label="Show keyboard shortcuts">
+                    <span class="option-icon" aria-hidden="true">⌨️</span>
+                    <span class="option-text">Keyboard Shortcuts</span>
+                    <span class="option-shortcut">?</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>

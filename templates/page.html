@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock title %}
+{% block description %}{{ page.summary | default(value=page.description) | default(value=config.description) }}{% endblock description %}
+
+{% block og_type %}article{% endblock og_type %}
+{% block og_title %}{{ page.title }}{% endblock og_title %}
+{% block og_description %}{{ page.summary | default(value=page.description) | default(value=config.description) }}{% endblock og_description %}
+
+{% block body_class %}page{% endblock body_class %}
+
+{% block extra_head %}
+{% if page.date %}
+<meta property="article:published_time" content="{{ page.date | date(format="%Y-%m-%dT%H:%M:%S%z") }}">
+{% endif %}
+{% if page.updated %}
+<meta property="article:modified_time" content="{{ page.updated | date(format="%Y-%m-%dT%H:%M:%S%z") }}">
+{% endif %}
+{% if config.extra.author %}
+<meta property="article:author" content="{{ config.extra.author }}">
+{% endif %}
+{% if page.taxonomies.tags %}
+{% for tag in page.taxonomies.tags %}
+<meta property="article:tag" content="{{ tag }}">
+{% endfor %}
+{% endif %}
+{% endblock extra_head %}
+
+{% block content %}
+<div class="page-content">
+    <article class="post" itemscope itemtype="http://schema.org/Article">
+        <!-- Article Header -->
+        <header class="post-header">
+            <div class="content-wrapper">
+                <h1 class="post-title" itemprop="headline">{{ page.title }}</h1>
+                
+                <div class="post-meta">
+                    {% if page.date %}
+                    <time class="post-date" datetime="{{ page.date | date(format="%Y-%m-%d") }}" itemprop="datePublished">
+                        <span class="visually-hidden">Published on </span>
+                        {{ page.date | date(format="%B %d, %Y") }}
+                    </time>
+                    {% endif %}
+                    
+                    {% if page.updated and page.updated != page.date %}
+                    <time class="post-updated" datetime="{{ page.updated | date(format="%Y-%m-%d") }}" itemprop="dateModified">
+                        <span class="visually-hidden">Updated on </span>
+                        Updated {{ page.updated | date(format="%B %d, %Y") }}
+                    </time>
+                    {% endif %}
+                    
+                    {% if page.reading_time %}
+                    <span class="reading-time" aria-label="Estimated reading time">
+                        {{ page.reading_time }} min read
+                    </span>
+                    {% endif %}
+                </div>
+                
+                {% if page.summary %}
+                <div class="post-summary" itemprop="description">
+                    {{ page.summary | safe }}
+                </div>
+                {% endif %}
+                
+                {% if page.taxonomies.tags %}
+                <div class="post-tags">
+                    <span class="tags-label visually-hidden">Tags:</span>
+                    <ul class="tags-list">
+                        {% for tag in page.taxonomies.tags %}
+                        <li class="tag">
+                            <a href="{{ get_taxonomy_url(kind="tags", name=tag) | safe }}" rel="tag">#{{ tag }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </header>
+        
+        <!-- Article Content -->
+        <div class="post-body" itemprop="articleBody">
+            <div class="content-wrapper">
+                {{ page.content | safe }}
+            </div>
+        </div>
+        
+        <!-- Article Footer -->
+        <footer class="post-footer">
+            <div class="content-wrapper">
+                {% if config.extra.author %}
+                <div class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                    <span class="author-label">Written by </span>
+                    <span class="author-name" itemprop="name">{{ config.extra.author }}</span>
+                    {% if config.extra.email %}
+                    <link itemprop="email" href="mailto:{{ config.extra.email }}">
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+        </footer>
+    </article>
+    
+    <!-- Navigation to Previous/Next Posts -->
+    {% if page.lighter or page.heavier %}
+    <nav class="post-navigation" aria-label="Post navigation">
+        <div class="content-wrapper">
+            <div class="nav-links">
+                {% if page.lighter %}
+                <div class="nav-previous">
+                    <a href="{{ page.lighter.permalink | safe }}" rel="prev">
+                        <span class="nav-label">← Previous</span>
+                        <span class="nav-title">{{ page.lighter.title }}</span>
+                    </a>
+                </div>
+                {% endif %}
+                
+                {% if page.heavier %}
+                <div class="nav-next">
+                    <a href="{{ page.heavier.permalink | safe }}" rel="next">
+                        <span class="nav-label">Next →</span>
+                        <span class="nav-title">{{ page.heavier.title }}</span>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    {% endif %}
+</div>
+{% endblock content %}

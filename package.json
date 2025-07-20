@@ -1,0 +1,21 @@
+{
+  "name": "xotheme",
+  "version": "1.0.0",
+  "description": "XOstack Zola SSG Theme",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xostack/xotheme.git"
+  },
+  "keywords": ["zola", "theme", "static site generator", "XOstack"],
+  "author": "Harshad Sharma <harshad@sharma.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xostack/xotheme/issues"
+  },
+  "homepage": "https://github.com/xostack/xotheme#readme"
+}

@@ -11,7 +11,7 @@
   text-decoration: none;
   border-radius: 6px;
   z-index: 1000;
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-medium);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   
   &:focus {
@@ -441,7 +441,7 @@ body {
       
       .nav-title {
         font-size: var(--font-size-md);
-        font-weight: var(--font-weight-semibold);
+        font-weight: var(--font-weight-medium);
         color: var(--color-text-heading);
         margin: 0;
         font-family: var(--font-serif);
@@ -505,7 +505,7 @@ body {
       &.current {
         background-color: var(--color-primary);
         color: white;
-        font-weight: var(--font-weight-semibold);
+        font-weight: var(--font-weight-medium);
       }
     }
     
@@ -530,7 +530,7 @@ body {
       &.current {
         background-color: var(--color-primary);
         color: white;
-        font-weight: var(--font-weight-semibold);
+        font-weight: var(--font-weight-medium);
         border-color: var(--color-primary);
       }
       
@@ -727,6 +727,7 @@ main {
     text-align: center;
     padding-bottom: var(--space-l);
     border-bottom: 1px solid var(--color-bg-3);
+    margin-top: var(--space-xl);
     margin-bottom: var(--space-l);
     
     .section-title {
@@ -756,6 +757,7 @@ main {
     margin-bottom: var(--space-l);
     
     .post-title {
+      margin-top: var(--space-xl);
       margin-bottom: var(--space-m);
     }
     
@@ -803,11 +805,6 @@ main {
     
     blockquote {
       margin: var(--space-m) 0;
-    }
-    
-    pre {
-      margin: var(--space-m) 0;
-      overflow-x: auto;
     }
     
     hr {
@@ -1197,7 +1194,7 @@ main {
     
     // Legacy support for old dt/dd structure
     dt {
-      font-weight: var(--font-weight-semibold);
+      font-weight: var(--font-weight-medium);
       color: var(--color-text-heading);
       margin-bottom: var(--space-xs);
       display: flex;

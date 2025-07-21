@@ -1,0 +1,22 @@
+{% set icon_name = name %}
+{% set icon_fill = fill | default(value=false) %}
+{% set icon_size = size | default(value="md") %}
+
+{% if icon_fill %}
+  {% set base_class = "icon-filled" %}
+{% else %}
+  {% set base_class = "icon-outlined" %}
+{% endif %}
+
+{% set size_class = "" %}
+{% if icon_size == "xs" %}
+  {% set size_class = " size-xs" %}
+{% elif icon_size == "sm" %}
+  {% set size_class = " size-sm" %}
+{% elif icon_size == "lg" %}
+  {% set size_class = " size-lg" %}
+{% elif icon_size == "xl" %}
+  {% set size_class = " size-xl" %}
+{% endif %}
+
+<span class="{{ base_class }}{{ size_class }}" aria-hidden="true">{{ icon_name }}</span>

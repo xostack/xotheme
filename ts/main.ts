@@ -3,54 +3,195 @@
  * Handles mobile navigation and theme management
  */
 
+// Toast Notification System
+class ToastManager {
+  private container: HTMLElement;
+  
+  constructor() {
+    this.createContainer();
+  }
+  
+  private createContainer(): void {
+    // Create toast container if it doesn't exist
+    let container = document.getElementById('toast-container');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'toast-container';
+      container.className = 'toast-container';
+      container.setAttribute('aria-live', 'polite');
+      container.setAttribute('aria-atomic', 'true');
+      document.body.appendChild(container);
+    }
+    this.container = container;
+  }
+  
+  public show(message: string, duration: number = 3000): void {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.setAttribute('role', 'status');
+    toast.textContent = message;
+    
+    // Add to container
+    this.container.appendChild(toast);
+    
+    // Trigger animation
+    requestAnimationFrame(() => {
+      toast.classList.add('toast-show');
+    });
+    
+    // Auto remove
+    setTimeout(() => {
+      this.removeToast(toast);
+    }, duration);
+  }
+  
+  private removeToast(toast: HTMLElement): void {
+    toast.classList.add('toast-hide');
+    setTimeout(() => {
+      if (toast.parentNode) {
+        toast.parentNode.removeChild(toast);
+      }
+    }, 300);
+  }
+}
+
 // Theme Management Class
 class ThemeManager {
   private readonly storageKey = 'xotheme-theme';
   private htmlElement: HTMLElement;
+  private themeButton: HTMLElement | null = null;
+  private toastManager: ToastManager;
   
   constructor() {
     this.htmlElement = document.documentElement;
+    this.toastManager = new ToastManager();
     this.initializeTheme();
     this.bindEvents();
+    this.updateThemeButton();
   }
   
   private initializeTheme(): void {
     // Check localStorage first
     const savedTheme = localStorage.getItem(this.storageKey);
-    if (savedTheme === 'light' || savedTheme === 'dark') {
-      this.setTheme(savedTheme);
+    if (savedTheme === 'light' || savedTheme === 'dark' || savedTheme === 'auto') {
+      this.setTheme(savedTheme as 'light' | 'dark' | 'auto');
       return;
     }
     
-    // Check system preference
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    this.setTheme(prefersDark ? 'dark' : 'light');
+    // Default to auto if no preference is saved
+    this.setTheme('auto');
   }
   
-  private setTheme(theme: 'light' | 'dark'): void {
-    this.htmlElement.setAttribute('data-theme', theme);
+  private setTheme(theme: 'light' | 'dark' | 'auto'): void {
+    if (theme === 'auto') {
+      // Remove data-theme attribute to let CSS media queries work
+      this.htmlElement.removeAttribute('data-theme');
+      this.htmlElement.setAttribute('data-theme-preference', 'auto');
+    } else {
+      // Set explicit theme and preference
+      this.htmlElement.setAttribute('data-theme', theme);
+      this.htmlElement.setAttribute('data-theme-preference', theme);
+    }
     localStorage.setItem(this.storageKey, theme);
+    this.updateThemeButton();
   }
   
-  private getCurrentTheme(): 'light' | 'dark' {
-    const current = this.htmlElement.getAttribute('data-theme');
-    return current === 'dark' ? 'dark' : 'light';
+  private updateThemeButton(): void {
+    this.themeButton = document.getElementById('theme-toggle');
+    if (!this.themeButton) return;
+    
+    const currentTheme = this.getCurrentTheme();
+    const effectiveTheme = this.getEffectiveTheme();
+    
+    // Update icon and text based on current theme
+    const iconSpan = this.themeButton.querySelector('.option-icon');
+    const textSpan = this.themeButton.querySelector('.option-text');
+    
+    if (iconSpan && textSpan) {
+      switch (currentTheme) {
+        case 'light':
+          iconSpan.textContent = '☀️';
+          textSpan.textContent = 'Light Theme';
+          this.themeButton.setAttribute('aria-label', 'Switch to dark theme');
+          break;
+        case 'dark':
+          iconSpan.textContent = '🌙';
+          textSpan.textContent = 'Dark Theme';
+          this.themeButton.setAttribute('aria-label', 'Switch to auto theme');
+          break;
+        case 'auto':
+          iconSpan.textContent = effectiveTheme === 'dark' ? '🌓' : '🌕';
+          textSpan.textContent = 'Auto Theme';
+          this.themeButton.setAttribute('aria-label', 'Switch to light theme');
+          break;
+      }
+    }
+  }
+  
+  private getCurrentTheme(): 'light' | 'dark' | 'auto' {
+    const preference = this.htmlElement.getAttribute('data-theme-preference');
+    return (preference as 'light' | 'dark' | 'auto') || 'auto';
   }
   
   public toggleTheme(): void {
     const currentTheme = this.getCurrentTheme();
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    let newTheme: 'light' | 'dark' | 'auto';
+    let toastMessage: string;
+    
+    // Cycle through: auto -> light -> dark -> auto
+    switch (currentTheme) {
+      case 'auto':
+        newTheme = 'light';
+        toastMessage = '☀️ Switched to Light Theme';
+        break;
+      case 'light':
+        newTheme = 'dark';
+        toastMessage = '🌙 Switched to Dark Theme';
+        break;
+      case 'dark':
+        newTheme = 'auto';
+        const effectiveTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        toastMessage = `🌓 Switched to Auto Theme (${effectiveTheme === 'dark' ? 'Dark' : 'Light'})`;
+        break;
+      default:
+        newTheme = 'auto';
+        toastMessage = '🌓 Switched to Auto Theme';
+    }
+    
     this.setTheme(newTheme);
+    this.toastManager.show(toastMessage, 2500);
+  }
+  
+  public getEffectiveTheme(): 'light' | 'dark' {
+    const preference = this.getCurrentTheme();
+    if (preference === 'auto') {
+      // Check system preference
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    return preference;
   }
   
   private bindEvents(): void {
-    // Listen for system theme changes
+    // Listen for system theme changes when in auto mode
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-      // Only auto-switch if user hasn't manually set a preference
-      if (!localStorage.getItem(this.storageKey)) {
-        this.setTheme(e.matches ? 'dark' : 'light');
+      // Only respond if we're in auto mode
+      if (this.getCurrentTheme() === 'auto') {
+        // Force a reflow to update theme-aware components
+        this.updateThemeAwareComponents();
+        this.updateThemeButton(); // Update button icon for auto mode
       }
     });
+  }
+  
+  private updateThemeAwareComponents(): void {
+    // Dispatch a custom event for components that need to know about theme changes
+    const event = new CustomEvent('themechange', {
+      detail: {
+        theme: this.getCurrentTheme(),
+        effectiveTheme: this.getEffectiveTheme()
+      }
+    });
+    document.dispatchEvent(event);
   }
 }
 
@@ -569,6 +710,7 @@ let mobileNav: MobileNavigation;
 let shortcutManager: ShortcutManager;
 let progressBar: ReadingProgressBar;
 let optionsMenu: OptionsMenu;
+let toastManager: ToastManager;
 
 // Reading Progress Bar Class
 class ReadingProgressBar {
@@ -602,6 +744,7 @@ class ReadingProgressBar {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  toastManager = new ToastManager();
   themeManager = new ThemeManager();
   mobileNav = new MobileNavigation();
   shortcutManager = new ShortcutManager();

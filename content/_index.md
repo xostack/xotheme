@@ -1,6 +1,6 @@
 +++
 title = "Welcome to XOtheme"
-description = "A minimal, accessible Zola theme for portfolios and blogs"
+description = "A minimal, accessible Zola theme for portfolios and blogs with Material Symbols Rounded icons"
 
 [extra]
 hero.title = "XOtheme"
@@ -24,12 +24,22 @@ hero.colors.description = "hsla(210, 30%, 100%, 0.9)" # Slightly transparent whi
 
 ## About This Theme
 
-The theme uses Atkinson Hyperlegible as the primary font (designed specifically for improved legibility), Merriweather for serif text, and Victor Mono for code.
+The theme uses Atkinson Hyperlegible as the primary font (designed specifically for improved legibility), Merriweather for serif text, Victor Mono for code, and Material Icons for beautiful iconography.
+
+## Icons
+
+XOtheme includes icon via Google's Material Icons with both outlined and filled variants. The system supports multiple sizes, weights, and grades for maximum flexibility.
+
+{{ icon(name="palette") }} **[View the complete icon reference →](/about/icons/)**
+
+Quick examples: {{ icon(name="home") }} {{ icon(name="star", fill=true) }} {{ icon(name="settings", size="lg") }}
 
 ## Features
 
-- Responsive design that works on all devices
-- Dark/light theme
-- Clean, minimal design focused on content
-- Keyboard navigation
-- Screen reader friendly
+- {{ icon(name="smartphone") }} Responsive design that works on all devices
+- {{ icon(name="dark_mode") }} Dark/light theme support
+- {{ icon(name="design_services") }} Clean, minimal design focused on content
+- {{ icon(name="keyboard") }} Full keyboard navigation
+- {{ icon(name="accessibility") }} Screen reader friendly and WCAG AA compliant
+- {{ icon(name="speed") }} Optimized for performance
+- {{ icon(name="palette") }} Customizable color schemes

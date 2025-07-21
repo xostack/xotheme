@@ -1,0 +1,589 @@
+/* sass/_code.scss */
+/* XOtheme Code Block and Syntax Highlighting Styles */
+
+/* Base code styling - applies to both inline code and code blocks */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  font-weight: 400;
+  font-feature-settings: 'liga' 0; /* Disable ligatures for better code readability */
+}
+
+/* Inline code */
+p code,
+li code,
+td code,
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+  padding: 0.125rem 0.375rem;
+  background-color: var(--code-bg);
+  color: var(--code-text);
+  border: 1px solid var(--code-border);
+  border-radius: var(--radius-s);
+  white-space: nowrap;
+  overflow-wrap: break-word;
+  font-size: 0.875em;
+}
+
+/* Code blocks - Base styles that work with media queries */
+pre {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  padding: var(--space-m);
+  background-color: var(--code-block-bg); /* Let media queries handle this in auto mode */
+  border: 1px solid var(--code-block-border);
+  border-radius: var(--radius-m);
+  overflow-x: auto;
+  margin: var(--space-m) 0;
+  position: relative;
+  
+  /* Smooth scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: var(--code-scrollbar-thumb) var(--code-scrollbar-track);
+  
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: var(--code-scrollbar-track);
+    border-radius: 4px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: var(--code-scrollbar-thumb);
+    border-radius: 4px;
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--code-scrollbar-thumb-hover);
+  }
+}
+
+/* Override Zola's .z-code background for auto mode */
+pre .z-code,
+pre code {
+  background-color: transparent; /* Let parent handle background */
+  color: var(--code-text);
+}
+
+pre code {
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: inherit;
+  color: inherit;
+  white-space: pre;
+  word-wrap: normal;
+  overflow-wrap: normal;
+}
+
+/* Light theme code colors */
+:root {
+  /* Light theme inline code */
+  --code-bg: hsl(210, 30%, 96%);
+  --code-text: hsl(215, 35%, 25%);
+  --code-border: hsl(210, 30%, 88%);
+  
+  /* Light theme code blocks */
+  --code-block-bg: hsl(210, 30%, 98%);
+  --code-block-border: hsl(210, 30%, 90%);
+  
+  /* Light theme scrollbar */
+  --code-scrollbar-track: hsl(210, 30%, 94%);
+  --code-scrollbar-thumb: hsl(210, 20%, 75%);
+  --code-scrollbar-thumb-hover: hsl(210, 20%, 65%);
+  
+  /* Light theme syntax highlighting colors */
+  --syntax-comment: hsl(210, 15%, 50%);
+  --syntax-keyword: hsl(220, 70%, 50%);
+  --syntax-string: hsl(120, 60%, 40%);
+  --syntax-number: hsl(35, 80%, 45%);
+  --syntax-operator: hsl(215, 35%, 35%);
+  --syntax-function: hsl(260, 60%, 50%);
+  --syntax-variable: hsl(10, 60%, 50%);
+  --syntax-type: hsl(180, 60%, 40%);
+  --syntax-constant: hsl(280, 60%, 50%);
+  --syntax-property: hsl(200, 60%, 45%);
+  --syntax-punctuation: hsl(215, 25%, 40%);
+  --syntax-tag: hsl(10, 70%, 50%);
+  --syntax-attribute: hsl(35, 70%, 45%);
+  --syntax-regex: hsl(300, 60%, 50%);
+  --syntax-escape: hsl(160, 60%, 40%);
+  --syntax-builtin: hsl(195, 70%, 45%);
+}
+
+/* Dark theme code colors */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* Dark theme inline code */
+    --code-bg: hsl(215, 25%, 18%);
+    --code-text: hsl(210, 25%, 85%);
+    --code-border: hsl(215, 20%, 25%);
+    
+    /* Dark theme code blocks */
+    --code-block-bg: hsl(220, 25%, 15%);
+    --code-block-border: hsl(215, 20%, 22%);
+    
+    /* Dark theme scrollbar */
+    --code-scrollbar-track: hsl(215, 20%, 20%);
+    --code-scrollbar-thumb: hsl(210, 15%, 40%);
+    --code-scrollbar-thumb-hover: hsl(210, 15%, 50%);
+    
+    /* Dark theme syntax highlighting colors - based on popular dark themes */
+    --syntax-comment: hsl(220, 15%, 55%);
+    --syntax-keyword: hsl(225, 85%, 75%);
+    --syntax-string: hsl(95, 60%, 65%);
+    --syntax-number: hsl(35, 85%, 70%);
+    --syntax-operator: hsl(210, 25%, 80%);
+    --syntax-function: hsl(270, 75%, 80%);
+    --syntax-variable: hsl(15, 75%, 75%);
+    --syntax-type: hsl(180, 70%, 70%);
+    --syntax-constant: hsl(285, 75%, 80%);
+    --syntax-property: hsl(200, 75%, 75%);
+    --syntax-punctuation: hsl(210, 25%, 75%);
+    --syntax-tag: hsl(15, 85%, 75%);
+    --syntax-attribute: hsl(35, 85%, 75%);
+    --syntax-regex: hsl(300, 75%, 80%);
+    --syntax-escape: hsl(160, 70%, 70%);
+    --syntax-builtin: hsl(195, 85%, 75%);
+  }
+}
+
+/* JS Override for Dark Theme */
+[data-theme="dark"] {
+  /* Dark theme inline code */
+  --code-bg: hsl(215, 25%, 18%);
+  --code-text: hsl(210, 25%, 85%);
+  --code-border: hsl(215, 20%, 25%);
+  
+  /* Dark theme code blocks */
+  --code-block-bg: hsl(220, 25%, 15%);
+  --code-block-border: hsl(215, 20%, 22%);
+  
+  /* Dark theme scrollbar */
+  --code-scrollbar-track: hsl(215, 20%, 20%);
+  --code-scrollbar-thumb: hsl(210, 15%, 40%);
+  --code-scrollbar-thumb-hover: hsl(210, 15%, 50%);
+  
+  /* Dark theme syntax highlighting colors */
+  --syntax-comment: hsl(220, 15%, 55%);
+  --syntax-keyword: hsl(225, 85%, 75%);
+  --syntax-string: hsl(95, 60%, 65%);
+  --syntax-number: hsl(35, 85%, 70%);
+  --syntax-operator: hsl(210, 25%, 80%);
+  --syntax-function: hsl(270, 75%, 80%);
+  --syntax-variable: hsl(15, 75%, 75%);
+  --syntax-type: hsl(180, 70%, 70%);
+  --syntax-constant: hsl(285, 75%, 80%);
+  --syntax-property: hsl(200, 75%, 75%);
+  --syntax-punctuation: hsl(210, 25%, 75%);
+  --syntax-tag: hsl(15, 85%, 75%);
+  --syntax-attribute: hsl(35, 85%, 75%);
+  --syntax-regex: hsl(300, 75%, 80%);
+  --syntax-escape: hsl(160, 70%, 70%);
+  --syntax-builtin: hsl(195, 85%, 75%);
+}
+
+/* JS Override for Light Theme */
+[data-theme="light"] {
+  /* Light theme inline code */
+  --code-bg: hsl(210, 30%, 96%);
+  --code-text: hsl(215, 35%, 25%);
+  --code-border: hsl(210, 30%, 88%);
+  
+  /* Light theme code blocks */
+  --code-block-bg: hsl(210, 30%, 98%);
+  --code-block-border: hsl(210, 30%, 90%);
+  
+  /* Light theme scrollbar */
+  --code-scrollbar-track: hsl(210, 30%, 94%);
+  --code-scrollbar-thumb: hsl(210, 20%, 75%);
+  --code-scrollbar-thumb-hover: hsl(210, 20%, 65%);
+  
+  /* Light theme syntax highlighting colors */
+  --syntax-comment: hsl(210, 15%, 50%);
+  --syntax-keyword: hsl(220, 70%, 50%);
+  --syntax-string: hsl(120, 60%, 40%);
+  --syntax-number: hsl(35, 80%, 45%);
+  --syntax-operator: hsl(215, 35%, 35%);
+  --syntax-function: hsl(260, 60%, 50%);
+  --syntax-variable: hsl(10, 60%, 50%);
+  --syntax-type: hsl(180, 60%, 40%);
+  --syntax-constant: hsl(280, 60%, 50%);
+  --syntax-property: hsl(200, 60%, 45%);
+  --syntax-punctuation: hsl(215, 25%, 40%);
+  --syntax-tag: hsl(10, 70%, 50%);
+  --syntax-attribute: hsl(35, 70%, 45%);
+  --syntax-regex: hsl(300, 60%, 50%);
+  --syntax-escape: hsl(160, 60%, 40%);
+  --syntax-builtin: hsl(195, 70%, 45%);
+}
+
+/* Syntax highlighting classes - TextMate scopes converted to CSS classes with z- prefix */
+
+/* Comments */
+.z-comment,
+.z-comment-line,
+.z-comment-block {
+  color: var(--syntax-comment);
+  font-style: italic;
+}
+
+/* Keywords and storage types */
+.z-keyword,
+.z-storage,
+.z-storage-type,
+.z-keyword-control,
+.z-keyword-operator {
+  color: var(--syntax-keyword);
+  font-weight: 500;
+}
+
+/* Strings */
+.z-string,
+.z-string-quoted,
+.z-string-interpolated {
+  color: var(--syntax-string);
+}
+
+/* Numbers and constants */
+.z-constant,
+.z-constant-numeric,
+.z-constant-language,
+.z-literal,
+.z-literal-number {
+  color: var(--syntax-number);
+}
+
+/* Operators and punctuation */
+.z-keyword-operator,
+.z-punctuation {
+  color: var(--syntax-operator);
+}
+
+/* Function names and calls */
+.z-entity,
+.z-entity-name,
+.z-entity-name-function,
+.z-support,
+.z-support-function {
+  color: var(--syntax-function);
+  font-weight: 500;
+}
+
+/* Variables and parameters */
+.z-variable,
+.z-variable-parameter,
+.z-variable-other {
+  color: var(--syntax-variable);
+}
+
+/* Types and classes */
+.z-entity-name-type,
+.z-entity-name-class,
+.z-support-type,
+.z-support-class {
+  color: var(--syntax-type);
+  font-weight: 500;
+}
+
+/* Built-in constants */
+.z-support-constant,
+.z-constant-builtin {
+  color: var(--syntax-constant);
+  font-weight: 500;
+}
+
+/* Object properties and attributes */
+.z-variable-other-property,
+.z-entity-other-attribute-name {
+  color: var(--syntax-property);
+}
+
+/* HTML/XML tags */
+.z-entity-name-tag {
+  color: var(--syntax-tag);
+  font-weight: 500;
+}
+
+/* HTML/XML attributes */
+.z-entity-other-attribute-name {
+  color: var(--syntax-attribute);
+}
+
+/* Regular expressions */
+.z-string-regexp {
+  color: var(--syntax-regex);
+}
+
+/* Escape sequences */
+.z-constant-character-escape {
+  color: var(--syntax-escape);
+  font-weight: 500;
+}
+
+/* Source scopes (general language containers) - inherit text color */
+
+/* Meta scopes (structural elements) */
+.z-meta {
+  /* Usually inherit or use muted color */
+  color: var(--syntax-punctuation);
+}
+
+/* Invalid/error highlighting */
+.z-invalid {
+  color: hsl(0, 80%, 60%);
+  background-color: hsla(0, 80%, 60%, 0.1);
+}
+
+/* Language-specific overrides */
+
+/* JavaScript/TypeScript specifics */
+.z-meta-function-call .z-entity-name-function {
+  color: var(--syntax-function);
+}
+
+.z-variable-other-object {
+  color: var(--syntax-variable);
+}
+
+/* CSS specifics */
+.z-entity-name-tag-css {
+  color: var(--syntax-tag);
+}
+
+.z-support-type-property-name {
+  color: var(--syntax-property);
+}
+
+/* Markdown specifics */
+.z-markup-heading {
+  color: var(--syntax-keyword);
+  font-weight: 600;
+}
+
+.z-markup-bold {
+  font-weight: 600;
+}
+
+.z-markup-italic {
+  font-style: italic;
+}
+
+.z-markup-raw,
+.z-markup-raw-inline {
+  color: var(--syntax-string);
+  background-color: var(--code-bg);
+}
+
+/* JSON specifics */
+.z-meta-structure-dictionary-key {
+  color: var(--syntax-property);
+}
+
+/* Shell/Bash specifics */
+.z-support-function-builtin {
+  color: var(--syntax-builtin);
+}
+
+/* Python specifics */
+.z-storage-type-function {
+  color: var(--syntax-keyword);
+}
+
+.z-variable-parameter-function {
+  color: var(--syntax-variable);
+}
+
+/* Additional code block enhancements */
+pre {
+  /* Add a subtle shadow for depth */
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.06);
+  
+  /* Improve readability with better spacing */
+  tab-size: 2;
+  
+  /* Copy button area (for future enhancement) */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    pointer-events: none;
+  }
+}
+
+/* Ensure our theme variables work in all scenarios */
+
+/* 1. Auto mode: Use media queries (no data-theme attribute) */
+:root:not([data-theme]) pre {
+  background-color: var(--code-block-bg);
+}
+
+:root:not([data-theme]) pre .z-code,
+:root:not([data-theme]) pre code {
+  background-color: transparent;
+  color: var(--code-text);
+}
+
+/* 2. Explicit theme override with higher specificity */
+html[data-theme="light"] pre {
+  background-color: var(--code-block-bg) !important;
+}
+
+html[data-theme="dark"] pre {
+  background-color: var(--code-block-bg) !important;
+}
+
+html[data-theme="light"] pre .z-code,
+html[data-theme="light"] pre code {
+  background-color: transparent !important;
+  color: var(--code-text) !important;
+}
+
+html[data-theme="dark"] pre .z-code,
+html[data-theme="dark"] pre code {
+  background-color: transparent !important;
+  color: var(--code-text) !important;
+}
+
+/* 3. Inline code elements */
+html[data-theme="light"] p code,
+html[data-theme="light"] li code,
+html[data-theme="light"] td code,
+html[data-theme="light"] h1 code,
+html[data-theme="light"] h2 code,
+html[data-theme="light"] h3 code,
+html[data-theme="light"] h4 code,
+html[data-theme="light"] h5 code,
+html[data-theme="light"] h6 code {
+  background-color: var(--code-bg) !important;
+  color: var(--code-text) !important;
+  border-color: var(--code-border) !important;
+}
+
+html[data-theme="dark"] p code,
+html[data-theme="dark"] li code,
+html[data-theme="dark"] td code,
+html[data-theme="dark"] h1 code,
+html[data-theme="dark"] h2 code,
+html[data-theme="dark"] h3 code,
+html[data-theme="dark"] h4 code,
+html[data-theme="dark"] h5 code,
+html[data-theme="dark"] h6 code {
+  background-color: var(--code-bg) !important;
+  color: var(--code-text) !important;
+  border-color: var(--code-border) !important;
+}
+
+/* Code block language indicator (if supported by Zola) */
+pre[data-lang]::after {
+  content: attr(data-lang);
+  position: absolute;
+  top: var(--space-xs);
+  right: var(--space-s);
+  font-size: var(--font-size-xs);
+  color: var(--syntax-comment);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Focus styles for accessibility */
+pre:focus,
+code:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Selection within code blocks */
+pre ::selection {
+  background-color: var(--color-primary);
+  color: var(--color-bg-1);
+}
+
+/* Enhanced table code (for code examples in tables) */
+table code {
+  background-color: transparent;
+  border: none;
+  padding: 0.125rem 0.25rem;
+  font-size: 0.8em;
+}
+
+/* Responsive code blocks */
+@media (max-width: 600px) {
+  pre {
+    margin-left: calc(-1 * var(--space-s));
+    margin-right: calc(-1 * var(--space-s));
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  
+  pre[data-lang]::after {
+    right: var(--space-s);
+  }
+}
+
+/* Code fence styling (for markdown code blocks with language specifiers) */
+.highlight {
+  margin: var(--space-m) 0;
+  
+  pre {
+    margin: 0;
+  }
+}
+
+/* Line numbers support (if enabled) */
+.linenos {
+  color: var(--syntax-comment);
+  user-select: none;
+  border-right: 1px solid var(--code-block-border);
+  padding-right: var(--space-s);
+  margin-right: var(--space-s);
+}
+
+/* Code diff styling (for git diffs, etc.) */
+.highlight .gd {
+  background-color: hsl(0, 60%, 95%);
+  color: hsl(0, 60%, 30%);
+}
+
+.highlight .gi {
+  background-color: hsl(120, 60%, 95%);
+  color: hsl(120, 60%, 30%);
+}
+
+[data-theme="dark"] .highlight .gd {
+  background-color: hsl(0, 60%, 20%);
+  color: hsl(0, 60%, 80%);
+}
+
+[data-theme="dark"] .highlight .gi {
+  background-color: hsl(120, 60%, 20%);
+  color: hsl(120, 60%, 80%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .highlight .gd {
+    background-color: hsl(0, 60%, 20%);
+    color: hsl(0, 60%, 80%);
+  }
+  
+  :root:not([data-theme="light"]) .highlight .gi {
+    background-color: hsl(120, 60%, 20%);
+    color: hsl(120, 60%, 80%);
+  }
+}

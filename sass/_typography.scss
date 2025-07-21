@@ -98,11 +98,30 @@
   font-display: swap;
 }
 
+/* Material Icons font faces */
+@font-face {
+  font-family: 'Material Icons';
+  src: url('/fonts/material-icons-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Material Icons Outlined';
+  src: url('/fonts/material-icons-outlined-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Typography variables and base styles */
 :root {
   --font-primary: 'Atkinson Hyperlegible', sans-serif;
   --font-serif: 'Merriweather', serif;
   --font-mono: 'Victor Mono', monospace;
+  --font-icons-filled: 'Material Icons', sans-serif;
+  --font-icons-outlined: 'Material Icons Outlined', sans-serif;
   
   /* Font sizes using golden ratio scale */
   --font-size-xs: 0.875rem;     /* 14px */
@@ -196,29 +215,7 @@ em, i {
   font-style: italic;
 }
 
-/* Code and preformatted text */
-code, kbd, samp {
-  font-family: var(--font-mono);
-  font-size: 0.9em;
-  font-weight: var(--font-weight-medium);
-}
 
-pre {
-  font-family: var(--font-mono);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-normal);
-  line-height: var(--line-height-normal);
-  overflow-x: auto;
-  padding: var(--space-s);
-  margin: var(--space-s) 0;
-  background-color: var(--color-bg-2);
-  border-radius: 4px;
-}
-
-pre code {
-  font-size: inherit;
-  font-weight: inherit;
-}
 
 /* Links */
 a {
@@ -286,5 +283,80 @@ blockquote p:last-child {
 .font-medium { font-weight: var(--font-weight-medium); }
 .font-semibold { font-weight: var(--font-weight-semibold); }
 .font-bold { font-weight: var(--font-weight-bold); }
+
+/* Material Icons styling - simplified for performance */
+.icon-outlined {
+  font-family: var(--font-icons-outlined);
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.2em;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  vertical-align: middle;
+  margin: 0 0.125em;
+}
+
+.icon-filled {
+  font-family: var(--font-icons-filled);
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.2em;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  vertical-align: middle;
+  margin: 0 0.125em;
+}
+
+/* Size variations only - no weight/grade needed for Material Icons */
+.icon-outlined.size-xs,
+.icon-filled.size-xs {
+  font-size: 0.9em !important;
+}
+
+.icon-outlined.size-sm,
+.icon-filled.size-sm {
+  font-size: 1em !important;
+}
+
+.icon-outlined.size-md,
+.icon-filled.size-md {
+  font-size: 1.2em !important;
+}
+
+.icon-outlined.size-lg,
+.icon-filled.size-lg {
+  font-size: 1.5em !important;
+}
+
+.icon-outlined.size-xl,
+.icon-filled.size-xl {
+  font-size: 2em !important;
+}
+
+
 
 

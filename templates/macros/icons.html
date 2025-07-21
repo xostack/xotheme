@@ -1,0 +1,61 @@
+{# Icon Macros for Material Symbols Rounded #}
+{# 
+  Usage examples:
+  {{ icons::icon(name="home") }}
+  {{ icons::icon(name="favorite", fill="filled") }}
+  {{ icons::icon(name="settings", size="lg", weight="bold") }}
+  {{ icons::icon(name="star", fill="filled", grade="thick", class="custom-class") }}
+#}
+
+{%- macro icon(name, fill="outlined", size="md", weight="normal", grade="normal", class="", style="", title="", aria_label="") -%}
+  {%- set base_class = "icon-" ~ fill -%}
+  {%- set size_class = "size-" ~ size -%}
+  {%- set weight_class = "weight-" ~ weight -%}
+  {%- set grade_class = "grade-" ~ grade -%}
+  {%- set all_classes = [base_class, size_class, weight_class, grade_class] -%}
+  {%- if class -%}
+    {%- set all_classes = all_classes | concat(with=class | split(pat=" ")) -%}
+  {%- endif -%}
+  <span 
+    class="{{ all_classes | join(sep=" ") }}"
+    {%- if style %} style="{{ style }}"{% endif -%}
+    {%- if title %} title="{{ title }}"{% endif -%}
+    {%- if aria_label %} aria-label="{{ aria_label }}"{% endif -%}
+    {%- if not aria_label and not title %} aria-hidden="true"{% endif -%}
+  >{{ name }}</span>
+{%- endmacro icon -%}
+
+{# Shorthand macros for common use cases #}
+
+{%- macro outlined(name, size="md", weight="normal", grade="normal", class="", style="", title="", aria_label="") -%}
+  {{ self::icon(name=name, fill="outlined", size=size, weight=weight, grade=grade, class=class, style=style, title=title, aria_label=aria_label) }}
+{%- endmacro outlined -%}
+
+{%- macro filled(name, size="md", weight="normal", grade="normal", class="", style="", title="", aria_label="") -%}
+  {{ self::icon(name=name, fill="filled", size=size, weight=weight, grade=grade, class=class, style=style, title=title, aria_label=aria_label) }}
+{%- endmacro filled -%}
+
+{# Size-specific shorthand macros #}
+
+{%- macro small(name, fill="outlined", weight="normal", grade="normal", class="", style="", title="", aria_label="") -%}
+  {{ self::icon(name=name, fill=fill, size="sm", weight=weight, grade=grade, class=class, style=style, title=title, aria_label=aria_label) }}
+{%- endmacro small -%}
+
+{%- macro large(name, fill="outlined", weight="normal", grade="normal", class="", style="", title="", aria_label="") -%}
+  {{ self::icon(name=name, fill=fill, size="lg", weight=weight, grade=grade, class=class, style=style, title=title, aria_label=aria_label) }}
+{%- endmacro large -%}
+
+{# Button/interactive icon with proper accessibility #}
+
+{%- macro button_icon(name, fill="outlined", size="md", weight="normal", grade="normal", class="", style="", aria_label="") -%}
+  {%- if not aria_label -%}
+    {%- set aria_label = name | replace(from="_", to=" ") | title -%}
+  {%- endif -%}
+  {{ self::icon(name=name, fill=fill, size=size, weight=weight, grade=grade, class=class, style=style, aria_label=aria_label) }}
+{%- endmacro button_icon -%}
+
+{# Link icon with decorative styling #}
+
+{%- macro link_icon(name, fill="outlined", size="sm", weight="normal", grade="normal", class="", style="") -%}
+  {{ self::icon(name=name, fill=fill, size=size, weight=weight, grade=grade, class=class, style=style, aria_label="") }}
+{%- endmacro link_icon -%}

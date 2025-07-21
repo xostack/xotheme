@@ -28,3 +28,7 @@ The theme uses three carefully selected font families:
 3. **Victor Mono** (Monospace) - A programming font with excellent clarity
 
 All fonts are self-hosted for privacy and performance.
+
+## More About XOtheme
+
+- {{ icon(name="palette") }} **[Icons Reference →](/about/icons/)** - Complete guide to Material Icons integration
